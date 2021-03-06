@@ -107,12 +107,6 @@ RSpec.describe 'merchant dashboard' do
 
     click_link("All Discounts")
 
-    expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1)) 
+    expect(current_path).to eq(merchant_bulk_discounts_path(@merchant1))
   end
 end
-
-
-# Then I am taken to my bulk discounts index page
-# Where I see all of my bulk discounts including their
-# percentage discount and quantity thresholds
-# And each bulk discount listed includes a link to its show page
