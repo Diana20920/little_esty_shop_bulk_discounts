@@ -3,7 +3,7 @@
 <ul>
   <% @bulk_discounts.each do |discount| %>
     <section id="discount-<%= discount.id %>">
-      <li><%= link_to "#{discount.percent}% off  #{discount.quantity} items" %></li>
+      <li><%= link_to "#{discount.percent}% off  #{discount.quantity} items", merchant_bulk_discount_path(@merchant, discount) %></li>
     </section>
   <% end %>
 </ul>

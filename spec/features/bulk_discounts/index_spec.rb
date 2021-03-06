@@ -40,6 +40,6 @@ RSpec.describe 'bulk discounts' do
 
     click_link("#{@discount1.percent}% off #{@discount1.quantity} items")
 
-    expect(current_path).to eq(merchant_bulk_discount_path(@discount1.id))
+    expect(current_path).to eq(merchant_bulk_discount_path(@merchant1, @discount1))
   end
 end

@@ -1,11 +1,12 @@
 class BulkDiscountsController < ApplicationController
   before_action :find_merchant, only: [:index, :show]
+
   def index
-    @bulk_discounts = @merchant.bulk_discounts.all
+    @bulk_discounts = @merchant.bulk_discounts
   end
 
   def show
-    @bulk_discount = @merchant.bulk_discounts.find(params[:id])
+    @bulk_discount = BulkDiscount.find(params[:id])
   end
 
   private
