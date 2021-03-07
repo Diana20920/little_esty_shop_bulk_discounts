@@ -14,9 +14,13 @@ RSpec.describe 'Edit Bulk Discount' do
     expect(find_field(:quantity).value).to eq("#{@discount1.quantity}")
   end
 
-  it 'I change any/all of the information and click submit then I am redirected to the bulk discount show page' do
-    
-  end
+  it 'I change any/all of the information, click submit, I am redirected to the bulk discount show page where I see the updated attributes' do
+    fill_in :percent, with: 65
+    fill_in :quantity, with: 1000
+    click_button("SAVE")
 
-  it 'And I see that the specific discount attributes have been updated'
+    expect(page).to have_content("Your changes have been saved!")
+    expect(page).to have_content("Percentage Discount is 65")
+    expect(page).to have_content("Quantity Threshold is 1000")
+  end
 end
