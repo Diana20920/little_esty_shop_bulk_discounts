@@ -12,4 +12,11 @@ RSpec.describe 'Show Bulk Discount Info' do
     expect(page).to have_content(@discount1.percent)
     expect(page).to have_content(@discount1.quantity)
   end
+
+  it 'Has an Edit link that takes me to a new page with a form to edit the discount' do
+    expect(page).to have_link("edit")
+    click_link("edit")
+
+    expect(page).to have_content("Edit Bulk Discount")
+  end
 end
