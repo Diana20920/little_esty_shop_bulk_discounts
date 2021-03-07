@@ -1,5 +1,5 @@
 class BulkDiscountsController < ApplicationController
-  before_action :find_merchant, only: [:index, :show, :new, :create]
+  before_action :find_merchant, only: [:index, :show, :new, :create, :destroy]
 
   def index
     @bulk_discounts = @merchant.bulk_discounts
@@ -23,6 +23,11 @@ class BulkDiscountsController < ApplicationController
     #   flash.notice = "Please enter numeric values in order to create your new bulk discount"
     #   render :new
     # end
+  end
+
+  def destroy
+    BulkDiscount.destroy(params[:id])
+    redirect_to merchant_bulk_discounts_path(@merchant)
   end
 
   private
