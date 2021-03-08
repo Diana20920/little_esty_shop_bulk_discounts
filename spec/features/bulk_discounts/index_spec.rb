@@ -71,4 +71,9 @@ RSpec.describe 'bulk discounts' do
     end
     expect(page).to_not have_link("#{@discount2.percent}% off #{@discount2.quantity} items")
   end
+
+  it 'I see a section with a header of Upcoming Holidays' do
+    expect(page).to have_content("Upcoming Holidays")
+  end
 end
+# In this section the name and date of the next 3 upcoming US holidays are listed.
