@@ -12,23 +12,22 @@
 <body>
   <div class="row">
     <p class='col-12'>Invoice #<%= @invoice.id %></p>
-  </div>
+  </div><br>
 
   <strong>Status: </strong>
     <section id="status-update-<%= @invoice.id %>">
       <%= form_with model: @invoice, url: admin_invoice_path(@invoice), method: :patch do |f| %>
         <%= f.select :status, Invoice.statuses.keys, selected: "#{@invoice.status}" %>
         <%= f.submit 'Update Invoice' %>
-    </section>
+    </section><br>
       <% end %>
   <p>Created on: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %>
-  <p>Total Revenue: $<%= @invoice.total_revenue %>
+  <p>Total Revenue: $<%= number_to_currency(@invoice.total_revenue_with_discount) %>
 
   <h4>Customer:</h4>
     <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %><br>
     <%= @invoice.customer.address %><br>
     <%= @invoice.customer.city %>, <%= @invoice.customer.state %> <%= @invoice.customer.zip %><br>
-  <br>
   <br>
   <h4>Items on this Invoice:</h4>
   <table class="table">
