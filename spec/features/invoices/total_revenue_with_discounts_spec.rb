@@ -5,6 +5,9 @@ RSpec.describe 'invoices show' do
     @merchant1 = Merchant.create!(name: 'Hair Care')
     @merchant2 = Merchant.create!(name: 'Jewelry')
 
+    @discount1 = @merchant1.bulk_discounts.create!(percent: 3, quantity: 5)
+    @discount2 = @merchant1.bulk_discounts.create!(percent: 10, quantity: 13)
+
     @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant1.id, status: 1)
     @item_2 = Item.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 8, merchant_id: @merchant1.id)
     @item_3 = Item.create!(name: "Brush", description: "This takes out tangles", unit_price: 5, merchant_id: @merchant1.id)
@@ -58,5 +61,17 @@ RSpec.describe 'invoices show' do
 
     # revenue_with_discount = @invoice_1.total_revenue > @invoice_1.total_revenue_with_discount
     expect(page).to have_content(@invoice_1.total_revenue_with_discount)
+  end
+
+  it 'Next to each invoice item I see a link to the show page for the bulk discount that was applied (if any)' do
+    visit merchant_invoice_path(@merchant1, @invoice_1)
+
+    within("#the-status-#{@ii_1.id}") do
+      expect(page).to have_link("view discounts")
+      click_link("view discounts")
+      expect(current_path).to eq(merchant_bulk_discount_path(@merchant1, @discount1))
+    end
+    # I need to get the path for the link above. It would be through the invoice, filtered by the item/invoice_item that had the discount applied.
+    # I think I may need a method to recall the 
   end
 end
