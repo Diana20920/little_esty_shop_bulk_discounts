@@ -15,7 +15,7 @@ class Invoice < ApplicationRecord
     invoice_items.sum("unit_price * quantity")
   end
 
-  def total_bulk_discount
+  def find_bulk_discounts
     invoice_items
     .joins(:bulk_discounts)
     .where("invoice_items.quantity >= bulk_discounts.quantity")
@@ -23,5 +23,8 @@ class Invoice < ApplicationRecord
     .order("bulk_discounts.percent desc")
     .uniq
   end
+
+  def total_revenue_with_discount
+    total_revenue -  find_bulk_discounts.sum(&:discount)
+  end
 end
-# Then I see that the total revenue for my merchant includes bulk discounts in the calculation
