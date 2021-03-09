@@ -13,4 +13,8 @@
 <h3>Upcoming Holidays</h3>
 <% @holidays.each do |holiday| %>
   <%= "#{holiday.name} coming up on #{holiday.date}" %><br>
-<% end %>
+<% end %><br><br>
+
+<footer>
+  <%= link_to "Back to Dashboard", merchant_dashboard_index_path(@merchant) %>
+</footer>
