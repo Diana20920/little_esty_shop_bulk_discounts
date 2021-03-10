@@ -24,6 +24,7 @@ class BulkDiscountsController < ApplicationController
     #   flash.notice = "Please enter numeric values in order to create your new bulk discount"
     #   render :new
     # end
+    # try to implement the above by using a validation for numerical values only.
   end
 
   def edit

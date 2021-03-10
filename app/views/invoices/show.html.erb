@@ -19,7 +19,7 @@
 
   <p> Created on: <%= @invoice.created_at.strftime("%A, %B %-d, %Y") %></p>
   <p>Total Revenue: <%= number_to_currency(@invoice.total_revenue_with_discount) %></p>
-  
+
 
   <h4>Customer:</h4>
     <%= @customer.first_name %> <%= @customer.last_name %><br>
@@ -31,6 +31,7 @@
       <tr class="tr">
         <th class="th1">Item Name</th>
         <th class="th1">Quantity</th>
+        <th class="th1">Discount Details</th>
         <th class="th1">Unit Price</th>
         <th class="th1">Status</th>
       </tr>
@@ -42,6 +43,7 @@
           <tr class="tr">
             <td style="text-align:center"><%= i.item.name %></td>
             <td style="text-align:center"><%= i.quantity %></td>
+            <td style="text-align:center"><%= link_to "view discounts" %></td>
             <td style="text-align:center">$<%= i.unit_price %></td>
             <td style="text-align:center"><%= form_with model: @invoice, url: merchant_invoice_path(@merchant, @invoice), method: :patch do |f| %>
                                             <%= f.select :status, Invoice.statuses.keys, selected: "#{@invoice.status}" %>
