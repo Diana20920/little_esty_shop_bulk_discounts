@@ -19,12 +19,14 @@ class Invoice < ApplicationRecord
     invoice_items
     .joins(:bulk_discounts)
     .where("invoice_items.quantity >= bulk_discounts.quantity")
-    .select("(invoice_items.quantity * invoice_items.unit_price)/bulk_discounts.percent AS discount, invoice_items.*, bulk_discounts.id AS discount_id")
+    .select("((invoice_items.quantity * invoice_items.unit_price) * (bulk_discounts.percent/100)) AS discount, invoice_items.*, bulk_discounts.id AS discount_id")
     .order("bulk_discounts.percent desc")
-    .uniq
   end
 
   def total_revenue_with_discount
-    total_revenue -  find_bulk_discounts.sum(&:discount)
+    total_revenue -  find_bulk_discounts.uniq.sum(&:discount)
   end
+
+  # I need a method for the link next to the invoice_items that can filter whether ii has discounts applied or not.
+  # then I can possibly have the link ONLY show if there are discounts applied. 
 end
