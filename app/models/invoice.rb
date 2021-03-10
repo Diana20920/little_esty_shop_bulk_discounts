@@ -28,5 +28,5 @@ class Invoice < ApplicationRecord
   end
 
   # I need a method for the link next to the invoice_items that can filter whether ii has discounts applied or not.
-  # then I can possibly have the link ONLY show if there are discounts applied. 
+  # then I can possibly have the link ONLY show if there are discounts applied.
 end
