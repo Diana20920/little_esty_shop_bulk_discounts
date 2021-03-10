@@ -52,7 +52,7 @@ RSpec.describe Invoice, type: :model do
         @ii_11 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_8.id, quantity: 1, unit_price: 10, status: 1)
         @discount_1 = BulkDiscount.create!(percent: 20, quantity: 15, merchant_id: @merchant1.id)
         # this is ALSO not working properly, and I have ran out of time to debug.
-        expect(@invoice_1.find_bulk_discounts.first.discount).to eq(0.0)
+        expect(@invoice_1.total_revenue_with_discount).to eq(210.0)
       end
     end
   end

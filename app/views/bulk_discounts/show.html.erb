@@ -4,3 +4,7 @@
 <p>Quantity Threshold is <%= @bulk_discount.quantity %></p>
 
 <%= link_to "edit", edit_merchant_bulk_discount_path(@merchant, @bulk_discount) %>
+
+<footer>
+  <%= link_to "Back to Dashboard", merchant_dashboard_index_path(@merchant) %>
+</footer>
